@@ -1,0 +1,94 @@
+def is_variable(x):
+    return isinstance(x, str) and len(x) > 0 and x[0].islower()
+
+def is_constant(x):
+    return isinstance(x, str) and len(x) > 0 and x[0].isupper() and not isinstance(x, list)
+
+def occurs_in(var, expression):
+    if expression == var:
+        return True
+    if isinstance(expression, list):
+        return any(occurs_in(var, element) for element in expression)
+    return False
+
+def apply_substitution(expression, subst):
+    if not subst:
+        return expression
+    if is_variable(expression):
+        return subst.get(expression, expression)
+    if isinstance(expression, list):
+        return [apply_substitution(element, subst) for element in expression]
+    return expression
+
+def compose_substitutions(s, subst):
+    new_subst = {}
+    for k, v in subst.items():
+        new_subst[k] = apply_substitution(v, s)
+    for k, v in s.items():
+        if k not in new_subst:
+            new_subst[k] = v
+    return new_subst
+
+def unify(psi1, psi2):
+    if is_variable(psi1) or is_constant(psi1) or is_variable(psi2) or is_constant(psi2):
+        if psi1 == psi2:
+            return {} 
+            
+        elif is_variable(psi1):
+            if occurs_in(psi1, psi2):
+                return "FAILURE"
+            else:
+                return {psi1: psi2}
+                
+        elif is_variable(psi2):
+            if occurs_in(psi2, psi1):
+                return "FAILURE"
+            else:
+                return {psi2: psi1}
+                
+        else:
+            return "FAILURE"
+
+    if isinstance(psi1, list) and isinstance(psi2, list):
+        if psi1[0] != psi2[0]:
+            return "FAILURE"
+
+        if len(psi1) != len(psi2):
+            return "FAILURE"
+
+        subst = {}
+
+        for i in range(1, len(psi1)):
+            s = unify(psi1[i], psi2[i])
+
+            if s == "FAILURE":
+                return "FAILURE"
+
+            if s != {}:
+                psi1 = apply_substitution(psi1, s)
+                psi2 = apply_substitution(psi2, s)
+                
+                subst = compose_substitutions(s, subst)
+
+        return subst
+    
+    return "FAILURE"
+
+if __name__ == "__main__":
+    print("--- Test 1: Example from Slide 3 ---")
+    expr1 = ["Eats", "x", "Apple"]
+    expr2 = ["Eats", "Riya", "y"]
+    result1 = unify(expr1, expr2)
+    print(f"Unifying {expr1} and {expr2} -> Result: {result1}\n")
+
+    print("--- Test 2: Example 2 from Slide 2 (Fails) ---")
+    expr3 = ["Knows", "John", "x"]
+    expr4 = ["Knows", "x", "Elisabeth"]
+    result2 = unify(expr3, expr4)
+    print(f"Unifying {expr3} and {expr4} -> Result: {result2}\n")
+    
+    print("--- Test 3: Predicate Mismatch from Slide 2 (Fails) ---")
+    expr5 = ["P", "x", ["h", "y"]]
+    expr6 = ["P", "a", ["f", "z"]]
+    result3 = unify(expr5, expr6)
+    print(f"Unifying {expr5} and {expr6} -> Result: {result3}")
