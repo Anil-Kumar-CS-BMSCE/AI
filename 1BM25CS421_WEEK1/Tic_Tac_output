@@ -1,0 +1,80 @@
+Welcome to Tic-Tac-Toe!
+1. Player 1 vs Player 2
+2. Player vs Computer
+Choose game mode (1 or 2): 2
+  |   |  
+---------
+  |   |  
+---------
+  |   |  
+---------
+
+Player 1's turn.
+Enter row index (0, 1, 2): 1
+Enter column index (0, 1, 2): 1
+  |   |  
+---------
+  | * |  
+---------
+  |   |  
+---------
+
+Computer's turn...
+  |   |  
+---------
+  | * |  
+---------
+o |   |  
+---------
+
+Player 1's turn.
+Enter row index (0, 1, 2): 1
+Enter column index (0, 1, 2): 0
+  |   |  
+---------
+* | * |  
+---------
+o |   |  
+---------
+
+Computer's turn...
+  |   |  
+---------
+* | * | o
+---------
+o |   |  
+---------
+
+Player 1's turn.
+Enter row index (0, 1, 2): 0
+Enter column index (0, 1, 2): 0
+* |   |  
+---------
+* | * | o
+---------
+o |   |  
+---------
+
+Computer's turn...
+* | o |  
+---------
+* | * | o
+---------
+o |   |  
+---------
+
+Player 1's turn.
+Enter row index (0, 1, 2): 7
+Enter column index (0, 1, 2): 7
+Invalid input. Row and column indices must be 0, 1, or 2.
+
+Player 1's turn.
+Enter row index (0, 1, 2): 2
+Enter column index (0, 1, 2): 2
+* | o |  
+---------
+* | * | o
+---------
+o |   | *
+---------
+Player 1 (*) won the game!
