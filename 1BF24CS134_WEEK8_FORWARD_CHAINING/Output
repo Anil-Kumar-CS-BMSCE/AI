@@ -1,0 +1,46 @@
+=================================================================
+       FIRST-ORDER LOGIC FORWARD CHAINING (FOL-FC)
+=================================================================
+Convention: Single lowercase letters (x, y, z) = Variables
+            Words/Upper-case (m1, CountryA, West) = Constants
+
+Enter number of facts: 4
+Enter Fact 1: Missile(m1)
+Enter Fact 2: Owns(CountryA, m1)
+Enter Fact 3: American(robert)
+Enter Fact 4: Enemy(CountryA, america)
+
+Enter number of rules: 4
+Format: Premise1(x) ^ Premise2(x, y) -> Conclusion(y)
+Enter Rule 1: Missile(x) => Weapon(x)
+Enter Rule 2: Enemy(x, america) => Hostile(x)
+Enter Rule 3: Missile(x) & Owns(CountryA, x) => Sells(robert, x, CountryA)
+Enter Rule 4: American(x) & Weapon(y) & Hostile(z) => Criminal(x)
+
+Enter query to prove: Criminal(robert)
+
+=================================================================
+FIRST-ORDER LOGIC FORWARD CHAINING TRACE
+=================================================================
+Initial Facts: Missile(m1), Owns(CountryA, m1), American(robert), Enemy(CountryA, america)
+Goal Query:    Criminal(robert) 
+
+Step 1: Fired [Missile(x) -> Weapon(x)]
+        Substitution: {x/m1}
+        Inferred:     Weapon(m1)
+
+Step 2: Fired [Enemy(x, america) -> Hostile(x)]
+        Substitution: {x/CountryA}
+        Inferred:     Hostile(CountryA)
+
+Step 3: Fired [Missile(x) ^ Owns(CountryA, x) -> Sells(robert, x, CountryA)]
+        Substitution: {x/m1}
+        Inferred:     Sells(robert, m1, CountryA)
+
+Step 4: Fired [American(x) ^ Weapon(y) ^ Hostile(z) -> Criminal(x)]
+        Substitution: {x/robert, y/m1, z/CountryA}
+        Inferred:     Criminal(robert)
+
+=================================================================
+RESULT: SUCCESS! Query 'Criminal(robert)' is PROVED.
+=================================================================
