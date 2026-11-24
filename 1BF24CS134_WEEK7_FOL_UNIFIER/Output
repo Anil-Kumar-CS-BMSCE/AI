@@ -1,0 +1,29 @@
+============================================================
+        FIRST ORDER LOGIC UNIFICATION
+============================================================
+Enter Expression 1: p(A, B, B)
+Enter Expression 2: p(x, y, z)
+
+Parsed Expression 1:
+p(A, B, B)
+
+Parsed Expression 2:
+p(x, y, z)
+
+------------------------------------------------------------
+UNIFICATION TRACE
+------------------------------------------------------------
+Matching: A with x
+Substitute: A -> x
+Matching: B with y
+Substitute: B -> y
+Matching: y with z
+Substitute: y -> z
+
+============================================================
+Result: UNIFICATION SUCCESSFUL
+MGU:
+    A -> x
+    B -> z
+    y -> z
+============================================================
