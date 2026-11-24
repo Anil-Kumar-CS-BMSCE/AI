@@ -1,0 +1,27 @@
+Initial Environment State: {'A': 'Dirty', 'B': 'Dirty'}
+
+--- Time Step 1 ---
+
+[Agent Status] Location: A | Status: Dirty
+-> Action: SUCK (Cleaning A...)
+Current Environment State: {'A': 'Clean', 'B': 'Dirty'}
+
+--- Time Step 2 ---
+
+[Agent Status] Location: A | Status: Clean
+-> Action: MOVE RIGHT (Moving to Room B)
+Current Environment State: {'A': 'Clean', 'B': 'Dirty'}
+
+--- Time Step 3 ---
+
+[Agent Status] Location: B | Status: Dirty
+-> Action: SUCK (Cleaning B...)
+Current Environment State: {'A': 'Clean', 'B': 'Clean'}
+
+--- Time Step 4 ---
+
+[Agent Status] Location: B | Status: Clean
+-> Action: MOVE LEFT (Moving to Room A)
+Current Environment State: {'A': 'Clean', 'B': 'Clean'}
+
+ Goal State Achieved: Both rooms are completely clean!
